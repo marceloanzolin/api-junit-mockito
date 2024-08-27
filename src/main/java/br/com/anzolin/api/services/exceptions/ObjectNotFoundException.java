@@ -1,4 +1,9 @@
 package br.com.anzolin.api.services.exceptions;
 
-public class ObjectNotFoundException {
+public class ObjectNotFoundException extends RuntimeException{
+
+        public ObjectNotFoundException(String message){
+            super(message);
+        }
+
 }
