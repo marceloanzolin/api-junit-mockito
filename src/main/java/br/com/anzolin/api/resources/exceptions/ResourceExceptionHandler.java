@@ -1,5 +1,6 @@
 package br.com.anzolin.api.resources.exceptions;
 
+import br.com.anzolin.api.services.exceptions.DataIntegrationViolationException;
 import br.com.anzolin.api.services.exceptions.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,5 +22,15 @@ public class ResourceExceptionHandler {
                 e.getMessage(),
                 request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrationViolationException.class)
+    public ResponseEntity<StandartError> objectNotFound(DataIntegrationViolationException e, HttpServletRequest request){
+        StandartError error = new StandartError(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                e.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }
