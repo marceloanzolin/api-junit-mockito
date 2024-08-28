@@ -2,7 +2,6 @@ package br.com.anzolin.api.resources.exceptions;
 
 import br.com.anzolin.api.services.exceptions.DataIntegrationViolationException;
 import br.com.anzolin.api.services.exceptions.ObjectNotFoundException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +14,8 @@ import java.time.LocalDateTime;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<StandartError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request){
-        StandartError error = new StandartError(
+    public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request){
+        StandardError error = new StandardError(
                 LocalDateTime.now(),
                 HttpStatus.NOT_FOUND.value(),
                 e.getMessage(),
@@ -25,8 +24,8 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(DataIntegrationViolationException.class)
-    public ResponseEntity<StandartError> objectNotFound(DataIntegrationViolationException e, HttpServletRequest request){
-        StandartError error = new StandartError(
+    public ResponseEntity<StandardError> dataIntegrityViolationExcepion(DataIntegrationViolationException e, HttpServletRequest request){
+        StandardError error = new StandardError(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 e.getMessage(),
